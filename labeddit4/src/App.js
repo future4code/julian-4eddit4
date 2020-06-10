@@ -1,13 +1,10 @@
 import React from 'react';
-import PaginaLogin from './paginas/paginaLogin';
-import PaginaCadastro from './paginas/paginaCadastro';
-import PaginaFeed from './paginas/paginaFeed';
-
+import RouterHandler from './router/RouterHandler'
 
 function App() {
   return (
     <div>
-      <PaginaFeed />
+      <RouterHandler />
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import React from 'react';
-import { Card, Button, TextField, Typography } from '@material-ui/core'
-import styled from 'styled-components'
+import { Card, Button, TextField, Typography } from '@material-ui/core';
+import { useParams, useHistory } from "react-router";
+import styled from 'styled-components';
 
 const CardLogin = styled(Card)`
 &&{
@@ -32,13 +33,19 @@ const Titulo = styled(Typography)`
 
 export default function PaginaLogin() {
 
+    const history = useHistory();
+
+    const irParaCadastro = () =>{
+        history.push('/cadastro');   
+    }
+
     return (
         <CardLogin>
             <Titulo color='primary'>Labeditt4</Titulo>
             <CampoTexto type='email' variant='outlined' label='Email'/>
             <CampoTexto type='password' variant='outlined' label='Senha'/>
             <Button size='big' variant='contained' color='primary'>Entrar</Button>
-            <Button size='big' variant='outlined'>Cadastrar</Button>
+            <Button size='big' variant='outlined' onClick={irParaCadastro}>Cadastrar</Button>
         </CardLogin>
     )
 

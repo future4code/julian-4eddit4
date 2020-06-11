@@ -1,34 +1,37 @@
-import React, { useState } from 'react';
-import syled from 'styled-components';
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import axios from 'axios';
 import Post from './Post';
 
 
 export default function PostsContainer(){
-    const [listaPosts, setListaPosts] = useState([
-        {
-            nome: 'Esmeralda',
-            texto: 'Esmeralda é uma telenovela brasileira, produzida pelo SBT e exibida entre 6 de dezembro de 2004 e 19 de julho de 2005, em 194 capítulos, substituindo Seus Olhos e sendo substituída por Os Ricos também Choram, no horário das 21h00 horas. Foi a 8ª novela produzida em parceria com a Televisa. Escrita por Henrique Zambelli, Rogério Garcia com supervisão de texto de Therezinha Giácomo e dirigida por Jacques Lagôa, Luiz Antônio Piá, direção geral de Henrique Zambelli e direção geral de teledramaturgia de David Grimberg, é',
-            comentarios: 8,
-            curtidas: -15
-        },
-        {
-            nome: 'POSX',
-            texto: 'Aknl aklndas aldlas oajsdlasn',
-            comentarios: 324,
-            curtidas: 12
-        },
-        {
-            nome: 'MASZ',
-            texto: 'Aknl aklndas aldlas oajsdlasn',
-            comentarios: 10,
-            curtidas: -112
+    const [listaPosts, setListaPosts] = useState([]);
+
+    useEffect(() => {
+        pegaPosts();
+    }, [])
+
+    const pegaPosts = () =>{
+        const token = window.localStorage.getItem('token');
+
+        const headers = {
+            'Authorization': token
         }
-    ])
+
+        axios.get('https://us-central1-labenu-apis.cloudfunctions.net/labEddit/posts', {headers})
+
+        .then(res => {
+            setListaPosts(res.data.posts);
+        })
+        .catch(err => console.log(err))
+
+    }
+
 
     return (
         <div>
             {listaPosts.map(post => {
-                return (<Post post={post}/>)
+                return (<Post post={post} key={post.id}/>)
             })}
         </div>
     )

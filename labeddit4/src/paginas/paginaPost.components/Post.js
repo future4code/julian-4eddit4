@@ -28,16 +28,12 @@ const Comentarios = styled.div`
   right: 10px;
 `;
 
-export default function PostsContainer(props) {
-const [post, setPost] = useState({
-    nome: 'XPTO',
-    texto: 'useState(initialState: { nome: string; texto: string; } | (() => { nome: string; texto: string; })): [{ nome: string; texto: string; }, React.Dispatch<React.SetStateAction<{ nome: string; texto: string; }>>]',
-    curtidas: 45,
-    comentarios: 0
-})
+export default function Post() {
+const [post, setPost] = useState('')
+
   return (
     <CardPost>
-      <Typography align="center" color="primary" variant="h5">
+      {/* <Typography align="center" color="primary" variant="h5">
         {post.nome}
       </Typography>
       <hr />
@@ -46,7 +42,7 @@ const [post, setPost] = useState({
         <ArrowUp color="primary" style={{cursor: 'pointer'}}/> {post.curtidas}{" "}
         <ArrowDown color="secondary" style={{cursor: 'pointer'}}/>
       </Votes>
-      <Comentarios>Comentários: {post.comentarios}</Comentarios>
+      <Comentarios>Comentários: {post.comentarios}</Comentarios> */}
     </CardPost>
   );
 }

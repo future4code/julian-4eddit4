@@ -5,11 +5,11 @@ import CampoNovoComentario from './paginaPost.components/CampoNovoComentario';
 import Post from './paginaPost.components/Post';
 import ComentariosContainer from './paginaPost.components/ComentariosContainer';
 
-export default function PaginaPost(){
+export default function PaginaPost({ match }){
 
     return(
         <div>
-        <Post/>
+        <Post postId={match.params.id}/>
         <CampoNovoComentario/>
         <ComentariosContainer/>
         <Button variant='outlined'>Voltar</Button>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router'
 import { Card, Button, TextField, Typography } from '@material-ui/core'
 import styled from 'styled-components'
 import axios from 'axios';
@@ -36,17 +37,23 @@ export default function PaginaCadastro() {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
 
+    const history = useHistory();
+    
     const handleCadastrar = () =>{
 
         const novoUsuario = {
-            name: nome,
-            email: email,
-            password: senha
+            'username': nome,
+            'email': email,
+            'password': senha
         }
 
         axios
         .post('https://us-central1-labenu-apis.cloudfunctions.net/labEddit/signup', novoUsuario)
-        .then(res => console.log(res))
+        .then(res =>{
+            const token = res.data.token;
+            window.localStorage.setItem('token', token);
+            history.push('/feed')
+        })
         .catch(err => console.log(err))
     }
 

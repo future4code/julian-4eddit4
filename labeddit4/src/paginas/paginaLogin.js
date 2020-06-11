@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, Button, TextField, Typography } from '@material-ui/core';
 import { useParams, useHistory } from "react-router";
 import styled from 'styled-components';
+import axios from 'axios';
 
 const CardLogin = styled(Card)`
 &&{
@@ -33,18 +34,41 @@ const Titulo = styled(Typography)`
 
 export default function PaginaLogin() {
 
+    const [email, setEmail] = useState('');
+    const [senha, setSenha] = useState('');
+
     const history = useHistory();
 
     const irParaCadastro = () =>{
         history.push('/cadastro');   
     }
 
+    const fazerLogin = () =>{
+
+        const body = {
+            'email': email,
+            'password': senha
+        }
+
+        axios
+        .post('https://us-central1-labenu-apis.cloudfunctions.net/labEddit/login', body)
+        .then(res => {
+            const token = res.data.token;
+
+            window.localStorage.setItem('token', token);
+
+            history.push('/feed')
+
+        })
+        .catch(err => console.log(err))
+
+    }
+
     return (
         <CardLogin>
             <Titulo color='primary'>Labeditt4</Titulo>
-            <CampoTexto type='email' variant='outlined' label='Email'/>
-            <CampoTexto type='password' variant='outlined' label='Senha'/>
-            <Button size='big' variant='contained' color='primary'>Entrar</Button>
+            <CampoTexto value={email} type='email' variant='outlined' label='Email' onChange={(e) => setEmail(e.target.value)}/>
+            <CampoTexto value={senha} type='password' variant='outlined' label='Senha' onChange={(e) => setSenha(e.target.value)}/>    <Button size='big' variant='contained' color='primary' onClick={fazerLogin}>Entrar</Button>
             <Button size='big' variant='outlined' onClick={irParaCadastro}>Cadastrar</Button>
         </CardLogin>
     )

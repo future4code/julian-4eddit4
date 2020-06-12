@@ -15,6 +15,8 @@ const CardCadastro = styled(Card)`
         margin-left: 30px;
         margin-right: 30px;
     }
+    background-color: #38232C;
+    color: white;
 }
 `
 const CampoTexto = styled(TextField)`
@@ -22,12 +24,15 @@ const CampoTexto = styled(TextField)`
     margin-top: 30px;
     margin-left: 30px;
     margin-right: 30px;
+    background-color: #38232C;
+    color: white;
 }
 `
 const Titulo = styled(Typography)`
 &&{
     margin-left: 30px;
     margin-top: 10px;
+    color: white;
 }
 `
 
@@ -59,11 +64,11 @@ export default function PaginaCadastro() {
 
     return (
         <CardCadastro>
-            <Titulo color='primary'>Labeditt4</Titulo>
-            <CampoTexto value={nome} type='text' variant='outlined' label='Nome de usuário' onChange={(e) => setNome(e.target.value)}/>
-            <CampoTexto value={email} type='email' variant='outlined' label='Email' onChange={(e) => setEmail(e.target.value)}/>
-            <CampoTexto value={senha} type='password' variant='outlined' label='Senha' onChange={(e) => setSenha(e.target.value)}/>
-            <Button onClick={handleCadastrar} size='big'  color='primary' variant='contained'>Cadastrar</Button>
+            <Titulo>Labeditt4</Titulo>
+            <CampoTexto  color='secondary' value={nome} type='text' variant='outlined' label='Nome de usuário' onChange={(e) => setNome(e.target.value)}/>
+            <CampoTexto  color='secondary' value={email} type='email' variant='outlined' label='Email' onChange={(e) => setEmail(e.target.value)}/>
+            <CampoTexto  color='secondary' value={senha} type='password' variant='outlined' label='Senha' onChange={(e) => setSenha(e.target.value)}/>
+            <Button onClick={handleCadastrar} size='big'  color='secondary' variant='contained'>Cadastrar</Button>
         </CardCadastro>
     )
 

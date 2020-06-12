@@ -1,32 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import syled from 'styled-components';
 import Comentario from './Comentario';
+import axios from 'axios';
 
+export default function ComentariosContainer(props){
+    const [listaComentarios, setListaComentarios] = useState('')
 
-export default function ComentariosContainer(){
-    const [listaComentarios, setListaComentarios] = useState([
-        {
-            nome: 'HGP',
-            texto: 'The API documentation of the Icon React component. Learn more about the props and the CSS customization points. Amaknda.aa oadokasmdlas oaniflaskfnsalnf oasmdasmnfoloo',
-            curtidas: -15
-        },
-        {
-            nome: 'POSX',
-            texto: 'VThe API documentation of the Icon React component. Learn more about the props and the CSS customization points.',
-            curtidas: 12
-        },
-        {
-            nome: 'MASZ',
-            texto: 'Aknl aklndas aldlas oajsdsadad lasn',
-            curtidas: -112
+    const pegaComentarios = () =>{
+        const id = props.postId;
+        const token = window.localStorage.getItem('token');
+      
+        const headers = {
+          'Authorization': token
         }
-    ])
-
+      
+        axios
+        .get(`https://us-central1-labenu-apis.cloudfunctions.net/labEddit/posts/${id}`, {headers})
+        .then(res => setListaComentarios(res.data.post.comments))
+        .catch(err => console.log(err))
+      }
+      
+      useEffect(() => {
+        pegaComentarios();
+      }, [listaComentarios])
+    
     return (
         <div>
-            {listaComentarios.map(comentario => {
-                return (<Comentario comentario={comentario}/>)
-            })}
+            {listaComentarios ? listaComentarios.map(comentario => {
+                return (<Comentario postId={props.postId} comentario={comentario}/>)
+            }) : <p>Carregando...</p>}
         </div>
     )
 

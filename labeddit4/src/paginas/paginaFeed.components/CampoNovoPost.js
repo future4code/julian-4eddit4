@@ -10,6 +10,8 @@ const CardNovoPost = styled(Card)`
     margin: 50px auto;
     width: 500px;
     padding: 10px 10px;
+    background-color: #38232C;
+    color: white;
 }
 `
 const CampoTexto = styled(TextField)`
@@ -47,9 +49,9 @@ export default function CampoNovoPost(){
     }
     return(
         <CardNovoPost>
-            <CampoTexto value={titulo} variant='outlined' onChange={(e) => setTitulo(e.target.value)} label='Título'/>
-            <CampoTexto value={texto} variant='outlined' onChange={(e) => setTexto(e.target.value)} label='Novo Post' rows='8' multiline/>
-            <Button color='primary' variant='contained' onClick={postar}>Postar</Button>
+            <CampoTexto color='secondary'  value={titulo} variant='outlined' onChange={(e) => setTitulo(e.target.value)} label='Título'/>
+            <CampoTexto  color='secondary' value={texto} variant='outlined' onChange={(e) => setTexto(e.target.value)} label='Novo Post' rows='8' multiline/>
+            <Button color='secondary' variant='contained' onClick={postar}>Postar</Button>
         </CardNovoPost>
     )
 }

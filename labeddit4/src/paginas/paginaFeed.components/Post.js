@@ -18,8 +18,10 @@ const CardPost = styled(Card)`
     position: relative;
     :hover{
       cursor: pointer;
-      border: 1px solid black;
+      border: 1px solid white;
     }
+    background-color: #38232C;
+    color: white;
   }
 `;
 
@@ -47,14 +49,14 @@ export default function Post(props) {
 
   return (
     <CardPost data-key={props.post.id} onClick={irParaPost}>
-      <Typography align="center" color="primary" variant="h5">
+      <Typography align="center" variant="h5">
         {props.post.username}: {props.post.title}
       </Typography>
       <hr />
       <Typography align="justify">{props.post.text}</Typography>
       <Votes>
-        <ArrowUp color="primary" style={{cursor: 'pointer'}}/> {props.post.votesCount}{" "}
-        <ArrowDown color="secondary" style={{cursor: 'pointer'}}/>
+        <ArrowUp style={{cursor: 'pointer'}}/> {props.post.votesCount}{" "}
+        <ArrowDown style={{cursor: 'pointer'}}/>
       </Votes>
       <Comentarios>Comentários: {props.post.commentsCount}</Comentarios>
     </CardPost>
